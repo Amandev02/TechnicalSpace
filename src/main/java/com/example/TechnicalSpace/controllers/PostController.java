@@ -6,6 +6,7 @@ import com.example.TechnicalSpace.models.Post;
 import com.example.TechnicalSpace.payload.CommentDTO;
 import com.example.TechnicalSpace.payload.PostDTO;
 import com.example.TechnicalSpace.services.PostService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +28,13 @@ public class PostController {
     }
 
     @PostMapping("/admin/posts/{categoryId}")
-    public ResponseEntity<PostDTO> createPost(@PathVariable Long categoryId, @RequestBody Post post){
+    public ResponseEntity<PostDTO> createPost(@Valid @PathVariable Long categoryId, @RequestBody Post post){
         PostDTO postDTO = postService.createPost(categoryId, post);
         return new ResponseEntity<>(postDTO, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/admin/posts/{postId}")
-    public ResponseEntity<String> deletePost(@PathVariable Long postId){
+    public ResponseEntity<String> deletePost(@Valid @PathVariable Long postId){
         String status = postService.deletePost(postId);
 
         return new ResponseEntity<String>(status, HttpStatus.OK);
@@ -47,7 +48,7 @@ public class PostController {
 
 
     @PostMapping("/admin/posts/{postId}")
-    public ResponseEntity<CommentDTO> addComment(@PathVariable Long postId, @RequestBody Comment comment){
+    public ResponseEntity<CommentDTO> addComment(@Valid @PathVariable Long postId, @RequestBody Comment comment){
         CommentDTO comments =postService.addCommentToPost(postId, comment);
         return new ResponseEntity<>(comments,HttpStatus.CREATED);
     }

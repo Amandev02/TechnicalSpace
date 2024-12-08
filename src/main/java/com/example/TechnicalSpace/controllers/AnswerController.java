@@ -18,7 +18,7 @@ public class AnswerController {
     AnswerService answerService;
 
 
-    @GetMapping("/api/ans/{QuestionId}")
+     @GetMapping("/api/ans/{QuestionId}")
     public ResponseEntity<List<AnswerDTO>> getAllAnswers(@PathVariable Long QuestionId){
         List<AnswerDTO> answers = answerService.getAllAnswers(QuestionId);
         return new ResponseEntity<>(answers, HttpStatus.OK);

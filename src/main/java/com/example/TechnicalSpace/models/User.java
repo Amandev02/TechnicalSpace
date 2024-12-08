@@ -7,10 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -72,6 +69,11 @@ public class User {
             orphanRemoval = true)
     private Set<Question> questions;
 
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(userId);
+    }
 
 //    @ToString.Exclude
 //    @OneToMany(mappedBy = "author", cascade = {

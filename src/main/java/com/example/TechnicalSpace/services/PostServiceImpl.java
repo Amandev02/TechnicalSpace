@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -55,7 +56,6 @@ public class PostServiceImpl implements PostService {
         User user = authUtil.loggedInUser();
         post.setAuthor(user);
         post.setCategory(category);
-
 
         Post savedPost = postRepository.save(post);
         return modelMapper.map(savedPost, PostDTO.class);

@@ -8,6 +8,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -37,6 +38,12 @@ public class Post {
     @ManyToOne
     @JsonIgnore
     private User author;
+
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(postId);
+    }
 
 //    @OneToMany(mappedBy = "posts", cascade = CascadeType.ALL)
 //    private List<Comment> comments;

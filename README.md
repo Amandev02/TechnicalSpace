@@ -1,1 +1,0 @@
-# Technical Space (A Knowledge Sharing Platform for Tech geeks)

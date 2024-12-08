@@ -14,6 +14,7 @@ import com.example.TechnicalSpace.repositories.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
     UserRepository userRepository;
 

@@ -59,13 +59,14 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "user", cascade = {
+    @OneToMany(mappedBy = "author", cascade = {
             CascadeType.PERSIST, CascadeType.MERGE},
             orphanRemoval = true)
     private Set<Post> posts;
 
+
     @ToString.Exclude
-    @OneToMany(mappedBy = "user", cascade = {
+    @OneToMany(mappedBy = "author", cascade = {
             CascadeType.PERSIST, CascadeType.MERGE},
             orphanRemoval = true)
     private Set<Question> questions;

@@ -112,7 +112,6 @@ public class AuthController {
                         roles.add(adminRole);
 
                         break;
-
                     default:
                         Role userRole = roleRepository.findByRoleName(AppRole.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));

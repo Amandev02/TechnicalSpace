@@ -75,6 +75,8 @@ public class PostServiceImpl implements PostService {
           Post post = postRepository.findById(postId)
                           .orElseThrow(()-> new ResourceNotFoundException("post","PostId",postId));
         comment.setPosts(post);
+        User user = authUtil.loggedInUser();
+        comment.setAuthor(user);
 
         Comment savedComment = commentRepositories.save(comment);
         return modelMapper.map(savedComment, CommentDTO.class);

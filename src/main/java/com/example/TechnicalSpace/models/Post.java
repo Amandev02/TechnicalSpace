@@ -1,6 +1,7 @@
 package com.example.TechnicalSpace.models;
 
 //import com.example.TechnicalSpace.payload.CommentDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,15 +26,7 @@ public class Post {
     private String image;
     private Long likes;
 
-//    public Post(String postName, String postDescription, String image, Long likes, LocalDate createdAt, Category category, User author) {
-//        this.postName = postName;
-//        this.postDescription = postDescription;
-//        this.image = image;
-//        this.likes = likes;
-//        this.createdAt = createdAt;
-//        this.category = category;
-//        this.author = author;
-//    }
+
 
     private LocalDateTime createdAt =  LocalDateTime.now();
 
@@ -42,6 +35,7 @@ public class Post {
     private Category category;
 
     @ManyToOne
+    @JsonIgnore
     private User author;
 
 //    @OneToMany(mappedBy = "posts", cascade = CascadeType.ALL)

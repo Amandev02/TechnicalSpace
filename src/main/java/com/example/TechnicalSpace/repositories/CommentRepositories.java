@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Repository
-public interface CommentRepositories extends JpaRepository<Comment, Integer> {
+public interface CommentRepositories extends JpaRepository<Comment, Long> {
 
     @Query("SELECT c FROM Comment c WHERE c.posts.postId = ?1")
     List<Comment> findByPostId(Long postId);

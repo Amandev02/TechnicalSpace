@@ -1,6 +1,7 @@
 package com.example.TechnicalSpace.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,10 +28,12 @@ public class Comment {
     private LocalDateTime createdAt =  LocalDateTime.now();
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "Posts")
     private Post posts;
 
 
     @ManyToOne
+    @JsonIgnore
     private User author;
 }

@@ -71,4 +71,12 @@ public class User {
             orphanRemoval = true)
     private Set<Question> questions;
 
+
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "author", cascade = {
+//            CascadeType.PERSIST, CascadeType.MERGE},
+//            orphanRemoval = true)
+//
+//     private Set<Comment> comments;
+
 }

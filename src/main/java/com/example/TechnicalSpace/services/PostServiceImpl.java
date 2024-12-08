@@ -3,12 +3,16 @@ package com.example.TechnicalSpace.services;
 import com.example.TechnicalSpace.exceptions.ResourceNotFoundException;
 import com.example.TechnicalSpace.models.Category;
 //import com.example.TechnicalSpace.models.Comment;
+import com.example.TechnicalSpace.models.Comment;
 import com.example.TechnicalSpace.models.Post;
 import com.example.TechnicalSpace.models.User;
+import com.example.TechnicalSpace.payload.CommentDTO;
 import com.example.TechnicalSpace.payload.PostDTO;
 import com.example.TechnicalSpace.repositories.CategoryRepository;
+import com.example.TechnicalSpace.repositories.CommentRepositories;
 import com.example.TechnicalSpace.repositories.PostRepository;
 import com.example.TechnicalSpace.util.AuthUtil;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +35,9 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private CommentRepositories commentRepositories;
+
 
     @Override
     public List<PostDTO> getAllPosts() {
@@ -52,6 +59,34 @@ public class PostServiceImpl implements PostService {
 
         Post savedPost = postRepository.save(post);
         return modelMapper.map(savedPost, PostDTO.class);
+    }
+
+    @Transactional
+    @Override
+    public String deletePost(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(()-> new ResourceNotFoundException("post","postId",postId));
+        postRepository.delete(post);
+        return "Post " + post.getPostName() + " deleted successfully";
+    }
+
+
+        @Override
+    public CommentDTO addCommentToPost(Long postId, Comment comment) {
+          Post post = postRepository.findById(postId)
+                          .orElseThrow(()-> new ResourceNotFoundException("post","PostId",postId));
+        comment.setPosts(post);
+
+        Comment savedComment = commentRepositories.save(comment);
+        return modelMapper.map(savedComment, CommentDTO.class);
+    }
+
+    @Override
+    public List<CommentDTO> getCommentsFromPost(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(()-> new ResourceNotFoundException("post","PostId",postId));
+        List<Comment> comments = commentRepositories.findByPostId(postId);
+         return comments.stream()
+                .map(comment -> modelMapper.map(comment, CommentDTO.class))
+                .toList();
     }
 
 

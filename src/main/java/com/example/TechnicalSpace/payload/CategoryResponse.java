@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoryResponse {
+
     private List<categoryDTO> content;
     private Integer pageNumber;
     private Integer pageSize;

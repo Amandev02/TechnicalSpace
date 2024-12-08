@@ -35,7 +35,7 @@ public class Post {
 //        this.author = author;
 //    }
 
-    private LocalDate createdAt;
+    private LocalDateTime createdAt =  LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "category_id")
